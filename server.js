@@ -1,14 +1,16 @@
 //Install express server
 const express = require('express');
 const path = require('path');
-
+const home = require('./api/home');
 const app = express();
+
+app.use(express.json());
+app.use('/api', home);
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/demo-app'));
 
 app.get('/*', function (req, res) {
-
     res.sendFile(path.join(__dirname + '/dist/demo-app/index.html'));
 });
 
